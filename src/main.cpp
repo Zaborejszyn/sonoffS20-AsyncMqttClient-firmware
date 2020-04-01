@@ -3,7 +3,7 @@
 #include <AsyncMqttClient.h>
 #include <ESP8266WiFi.h>
 #include <Ticker.h>
-#include <config.h>
+#include <config.h>  // change configExample.h for environment variables
 #define led 13
 #define btn 0
 #define relay 12
@@ -54,7 +54,9 @@ void connectToWifi() {
     WiFi.begin(ssid, password);
 }
 
-void connectToMqtt();
+void connectToMqtt() {
+    client.connect();
+}
 
 void onWifiConnect(const WiFiEventStationModeGotIP& event) {
     ledTicker.detach();
@@ -65,10 +67,6 @@ void onWifiConnect(const WiFiEventStationModeGotIP& event) {
 void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
     mqttReconnectTimer.detach();
     wifiReconnectTimer.once(2, connectToWifi);
-}
-
-void connectToMqtt() {
-    client.connect();
 }
 
 bool boot = false;
