@@ -102,6 +102,7 @@ void setup() {
     pinMode(btn, INPUT);
 
     WiFi.hostname(host);
+    WiFi.mode(WIFI_STA);
 
     wifiConnectHandler = WiFi.onStationModeGotIP(onWifiConnect);
     wifiDisconnectHandler = WiFi.onStationModeDisconnected(onWifiDisconnect);
