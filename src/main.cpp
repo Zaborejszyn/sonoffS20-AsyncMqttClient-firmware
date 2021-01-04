@@ -75,8 +75,9 @@ void onMqttConnect(bool sessionPresent) {
     if (!boot) {
         client.publish(statusTopic, 1, true, "connected");
         boot = true;
-    } else
+    } else {
         client.publish(statusTopic, 1, true, "reconnected");
+    }
     client.subscribe(relayTopic, 1);
 }
 
